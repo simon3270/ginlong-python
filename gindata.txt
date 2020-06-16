@@ -1,0 +1,116 @@
+Ginlong data format:
+
+Data looks same in TCP and in UDP long, UDP short is v different.
+
+Use Byte 12 to differentiate (81=long, 80=short)
+
+0-11 is the same for all messages of a given type
+
+     T   U1  U2
+  0: 68  68  68 Start of Data (not included in checksum)
+  1: 59  59  29 11 less than length of data excluding SOD, Checksum and EOD
+  2: 51  51  51
+  3: b0  b0  b1 b0 for long messages, b1 for short
+  4: 7b  7b  7b
+  5: ec  ec  ec
+  6: 3e  3e  3e
+  7: 24  24  24
+  8: 7b  7b  7b
+  9: ec  ec  ec
+ 10: 3e  3e  3e
+ 11: 24  24  24
+
+ 12: 81  81  80 81 for long ones, 80 for short
+ 13: 01  01  01 Country standard = UK
+ 14: 05  05  48 Power curve version?
+
+ 15: 30  30  34 T and U1 = 000608111111-001 (inverter number)
+ 16: 30  30  2e       U2 = 4.01.51Y4.0.02W1 (start of Firmware)
+ 17: 30  30  30
+ 18: 36  36  31
+ 19: 30  30  2e
+ 20: 38  38  35
+ 21: 31  31  31
+ 22: 31  31  59
+ 23: 31  31  34
+ 24: 31  31  2e
+ 25: 31  31  30
+ 26: 31  31  2e
+ 27: 2d  2d  30
+ 28: 30  30  32
+ 29: 30  30  57
+ 30: 31  31  31
+
+                below U2 continues firmware = .0.57(GL17-07-261-D)V (45=checksum, 16=EOD)
+ 31: 01  01  2e T & U1: Either 00 or 01
+ 32: 24  24  30 Temperature?
+ 33: 09  09  2e 33-34 VDC1 (all V and I are *10)
+ 34: 7e  54  35
+ 35: 09  09  37 35-36 VDC2
+ 36: 40  54  28
+ 37: 00  00  47 37-38 VDC3 (n/a here)
+ 38: 00  00  4c
+ 39: 00  00  31 39-40 IDC1
+ 40: 15  15  37
+ 41: 00  00  2d 41-42 IDC2
+ 42: 12  12  30
+ 43: 00  00  37 43-44 IDC3 (n/a here)
+ 44: 00  00  2d
+ 45: 00  00  32 45-46 IAC1
+ 46: 28  28  36
+ 47: 00  00  31 47-48 IAC2 (n/a here)
+ 48: 00  00  2d
+ 49: 00  00  44 49-50 IAC3 (n/a here)
+ 50: 00  00  29
+ 51: 09  09  56 51-52 VAC1
+ 52: 86  86  00
+ 53: 00  00  45 53-54 VAC2 (n/a here)
+ 54: 00  00  16
+ 55: 00  00     55-56 VAC3 (n/a here)
+ 56: 00  00  
+ 57: 13  13     57-58 Frequency*100 (here 49.98)
+ 58: 86  86  
+ 59: 03  03  
+ 60: cf  cf  
+ 61: 00  00  
+ 62: 00  00  
+ 63: 00  00  
+ 64: 00  00  
+ 65: 00  00  
+ 66: 0a  0a  
+ 67: 04  04     67-68 Yesterday's energy*100 (but day ends midnight China time)
+ 68: 88  88  
+ 69: 02  02     69-70 Today's energy*100 (ditto)
+ 70: 9e  9e  
+ 71: 00  00     71-74 (4 bytes) Total energy*10  
+ 72: 02  02  
+ 73: 7e  7e
+ 74: 98  98  
+ 75: 00  00     75-86 fixed data?
+ 76: 00  00  
+ 77: 00  00  
+ 78: 00  00  
+ 79: 00  00  
+ 80: 00  00  
+ 81: 00  00  
+ 82: 00  00  
+ 83: be  be  
+ 84: 36  36  
+ 85: 04  04  
+ 86: 01  01  
+ 87: 00  00     87-88 Power this month (no multiplier)
+ 88: 8a  8a  
+ 89: 00  00  
+ 90: 00  00  
+ 91: 02  02     91-92 Power last month (no mult)
+ 92: 1b  1b  
+ 93: 00  00  
+ 94: 00  00  
+ 95: 00  00  
+ 96: 00  00  
+ 97: 00  00  
+ 98: 00  00  
+ 99: 00  00  
+100: 00  00  
+101: bf  a9  Checksum - add all bytes from 2nd to previous one (here, 1 to 100 inclusive), mod 256
+102: 16  16  Always 16 (End of Data)
