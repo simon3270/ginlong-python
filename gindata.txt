@@ -112,5 +112,5 @@ Use Byte 12 to differentiate (81=long, 80=short)
  98: 00  00  
  99: 00  00  
 100: 00  00  
-101: bf  a9  Checksum - add all bytes from 2nd to previous one (here, 1 to 100 inclusive), mod 256
+101: b1  9b  Checksum - add all bytes from 2nd to previous one (here, 1 to 100 inclusive), mod 256
 102: 16  16  Always 16 (End of Data)
