@@ -41,7 +41,7 @@ and the total KwH for that day.
 Each day has:
 
 Date, Time of first reading, Time of last, Number of readings,
-Total for invertor, Difference from previous day
+Total kWH for invertor, Difference from previous day
 
 ## gindata.txt
 
