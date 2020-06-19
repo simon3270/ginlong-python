@@ -1,6 +1,6 @@
 # ginlong-python
-Get data from Solis Inverter and log to file, then scripts to show data, or
-get daily totals
+Get data from Solis 2G Inverter and log to file, then scripts to show data, or
+get daily totals (4G inverter has a different format)
 
 Note that all scripts use Python 3
 
