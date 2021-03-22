@@ -151,7 +151,7 @@ The "Start of Data" byte is 0x45, while the "End Of Data" byte is 0x15. The "che
 I haven't yet worked out what the short message is. It's sent every minute, and the bytes near the end seem to count up. maybe time that the Logger has been up?
 
 Byte: U1  U2
-  0:  45  a5 Start of data
+  0:  a5  a5 Start of data
   1:  5c  01 U1 - length -11?
   2:  00  00
   3:  10  10
