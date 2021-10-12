@@ -71,3 +71,8 @@ Total kWH for invertor, Difference from previous day
 ## gindata.txt
 
 A text description of the records available.
+
+# Support files
+
+The `support` directory contains scripts to support running of the above logging programs,
+and `crontab` entries to run the scripts.
