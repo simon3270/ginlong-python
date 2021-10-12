@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Kill the current poller at night, so that it starts afresh for tomorrow
+# Also check that at least some entries taken today + email if not
+# Would be better to maintain record of writes, but life's too short
+
+# Called just before midnight (so that today's files are today's
+
+cd ~/src/ginlong_poller
+./killginservpoller
+
+# Leave time for the run poller to rename the latest file
+sleep 10
+
+# Now gather today's files
+# File names are ginserv.log_YYYYMMDD_HHMMSS, e.g. ginserv.log_20200710_215336
+N=$(cat ginsserv.log_$(date '+%Y%m%d')* 2>/dev/null | wc -l)
+
+if [ $N -lt 50 ]; then
+  : not many lines today - email somone to tell them
+fi

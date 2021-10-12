@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Go to where the ginserv poller files are
+cd ~/src/ginlong_poller
+
+# First time round, start the poller immediately
+pollsleep=0
+
+# Loop round to restart poller if it stops
+while true; do
+  # If ginserv.py running, kill it and force a 5 min wait before restart
+  if pgrep -f ginserv.py >/dev/null; then
+    sudo pkill -f ginserv.py
+    pollsleep=300
+  fi
+
+  #Move away any old ginserv.log file
+  if [ -f ginserv.log ]; then
+    T=$(stat -c '%Y' ginserv.log)
+    mv ginserv.log ginserv.log_$(date --date=\@${T} '+%Y%m%d_%H%M%S')
+  fi
+
+  #Now run the poller afresh, possibly after a wait
+  sleep $pollsleep
+  python3 ginserv.py > ginserv.log 2>&1
+
+  # Next time round, wait 5 minutes before restarting the poller
+  pollsleep=300
+done

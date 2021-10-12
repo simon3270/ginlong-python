@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# If the log file is empty (82 bytes), remove it and kill the running poller
+
+cd ~/src/ginlong_poller
+
+lastlog=$(ls -tr ginserv.log*|tail -1)
+
+if [ "$lastlog" = "ginserv.log" ]; then
+  # ginserv.log is the last one
+  logsize=$(stat -c "%s" "$lastlog")
+  if [ $logsize -le 82 ]; then
+    # File is still just the header - tidy up
+    rm -f "$lastlog"
+    ./killginservpoller
+  fi
+fi

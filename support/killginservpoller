@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Stop the current ginserv poller, so that runginservpoller starts a new one
+
+# Go to where the ginserv poller files are
+cd ~/src/ginlong_poller
+
+# If ginserv.py running, kill it
+if pgrep -f ginserv.py >/dev/null; then
+  sudo pkill -f ginserv.py
+fi
