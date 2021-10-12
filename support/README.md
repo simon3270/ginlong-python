@@ -53,6 +53,7 @@ means that the next run starts the next day.
 # Crontab entries
 
 You may want a different approach, but I find that these crontab entries work well.
+I run them as my normal user (no need to run them as root).
 
     # Start the ginservpoller at boot time
     @reboot $HOME/src/ginlong_poller/runginservpoller
