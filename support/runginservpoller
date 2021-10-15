@@ -10,7 +10,7 @@ pollsleep=0
 while true; do
   # If ginserv.py running, kill it and force a 5 min wait before restart
   if pgrep -f ginserv.py >/dev/null; then
-    sudo pkill -f ginserv.py
+    pkill -f ginserv.py
     pollsleep=300
   fi
 

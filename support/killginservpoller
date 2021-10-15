@@ -7,5 +7,5 @@ cd ~/src/ginlong_poller
 
 # If ginserv.py running, kill it
 if pgrep -f ginserv.py >/dev/null; then
-  sudo pkill -f ginserv.py
+  pkill -f ginserv.py
 fi
